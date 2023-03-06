@@ -1136,7 +1136,7 @@ def completeMSNShoppingGame(browser: WebDriver):
         time.sleep(random.randint(4, 6))
         options_container = expandShadowElement(gaming_card)[1]
         getChildren(options_container)[0].find_element(By.TAG_NAME, 'button').click()
-    
+
     try:
         tries = 0
         print("[MSN GAME] Trying to complete MSN shopping game...")
@@ -1267,6 +1267,10 @@ def argumentParser():
     parser.add_argument('--everyday', 
                         action='store_true',
                         help='[Optional] This argument will make the script run everyday at the time you start.', 
+                        required=False)
+    parser.add_argument('--no_msn',
+                        action='store_true',
+                        help='[Optional] This will not check MSN Game Shopping.',
                         required=False)
     parser.add_argument('--headless',
                         help='[Optional] Enable headless browser.',
@@ -1572,8 +1576,6 @@ def farmer():
                     completePunchCards(browser)
                 if not LOGS[CURRENT_ACCOUNT]['More promotions']:
                     completeMorePromotions(browser)
-                if not LOGS[CURRENT_ACCOUNT]['MSN shopping game']:
-                    completeMSNShoppingGame(browser)
                 remainingSearches, remainingSearchesM = getRemainingSearches(browser)
                 MOBILE = bool(remainingSearchesM)
                 if remainingSearches != 0:
